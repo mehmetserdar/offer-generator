@@ -54,15 +54,19 @@ class ItemRow extends React.Component {
             value: this.props.item.name,
             id: this.props.item.id,
           }}/>
-          <EditableField
-            onItemizedItemEdit={this.props.onItemizedItemEdit}
-            cellData={{
-            type: "text",
-            name: "description",
-            placeholder: "Ürün Açıklaması",
-            value: this.props.item.description,
-            id: this.props.item.id
-          }}/>
+         <EditableField
+  onItemizedItemEdit={this.props.onItemizedItemEdit}
+  cellData={{
+    type: "textarea", // Set type to "textarea" for a multi-line text area
+    name: "description",
+    placeholder: "Ürün Açıklaması",
+    value: this.props.item.description,
+    id: this.props.item.id,
+    rows: 4, // Set the number of rows as needed
+    cols: 50, // Set the number of columns as needed
+  }}
+/>
+
         </td>
         <td style={{minWidth: '70px'}}>
           <EditableField

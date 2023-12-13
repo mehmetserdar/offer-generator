@@ -5,6 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
+import logo from '../logo.png'; // Tell webpack this JS file uses this image
+
 import { BiPaperPlane, BiCloudDownload } from "react-icons/bi";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf'
@@ -37,8 +39,10 @@ class InvoiceModal extends React.Component {
           <div id="invoiceCapture">
             <div className="d-flex flex-row justify-content-between align-items-start bg-light w-100 p-4">
               <div className="w-100">
-                <h4 className="fw-bold my-2">GREEN PLANET GAMING BİLGİSAYAR</h4>
-                <h6 className="fw-bold text-secondary mb-1">
+              <img src={logo} alt="Logo" width={280}/>
+         
+              
+                  <h6 className="fw-bold text-secondary mb-1">
                   Teklif NO#: {this.props.info.invoiceNumber||''}
                 </h6>
               </div>
@@ -70,7 +74,7 @@ class InvoiceModal extends React.Component {
                 <thead>
                   <tr>
                     <th>ADET</th>
-                    <th>ÜRÜN / AÇIKLAMA</th>
+                    <th>ÜRÜN - AÇIKLAMA</th>
                     <th className="text-end">FİYAT</th>
                     <th className="text-end">TUTAR</th>
                   </tr>
@@ -83,7 +87,7 @@ class InvoiceModal extends React.Component {
                           {item.quantity}
                         </td>
                         <td>
-                          {item.name} - {item.description}
+                          <b>{item.name}</b> - {item.description}
                         </td>
                         <td className="text-end" style={{width: '100px'}}>{this.props.currency} {item.price}</td>
                         <td className="text-end" style={{width: '100px'}}>{item.price * item.quantity}</td>
