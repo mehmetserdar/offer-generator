@@ -106,11 +106,6 @@ class InvoiceModal extends React.Component {
               </Table>
               <Table>
                 <tbody>
-                  <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                  </tr>
                   <tr className="text-end">
                     <td></td>
                     <td className="fw-bold" style={{ width: '100px' }}>ARA TOPLAM</td>
