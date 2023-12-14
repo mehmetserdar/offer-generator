@@ -95,7 +95,7 @@ class InvoiceModal extends React.Component {
                           {this.props.currency} {item.price}
                         </td>
                         <td className="text-end" style={{ width: '100px' }}>
-                          {item.price * item.quantity}
+                          {this.props.currency} {(item.price * item.quantity).toFixed(2)}
                         </td>
                       </tr>
                     );
@@ -116,18 +116,18 @@ class InvoiceModal extends React.Component {
                     <td className="fw-bold" style={{ width: '100px' }}>ARA TOPLAM</td>
                     <td className="text-end" style={{ width: '100px' }}>{this.props.currency} {this.props.subTotal}</td>
                   </tr>
-                  {this.props.taxAmmount != 0.00 &&
+                  {this.props.taxAmount != 0.00 &&
                     <tr className="text-end">
                       <td></td>
                       <td className="fw-bold" style={{ width: '100px' }}>VERGİ</td>
-                      <td className="text-end" style={{ width: '100px' }}>{this.props.currency} {this.props.taxAmmount}</td>
+                      <td className="text-end" style={{ width: '100px' }}>{this.props.currency} {this.props.taxAmount}</td>
                     </tr>
                   }
-                  {this.props.discountAmmount != 0.00 &&
+                  {this.props.discountAmount != 0.00 &&
                     <tr className="text-end">
                       <td></td>
                       <td className="fw-bold" style={{ width: '100px' }}>İSKONTO</td>
-                      <td className="text-end" style={{ width: '100px' }}>{this.props.currency} {this.props.discountAmmount}</td>
+                      <td className="text-end" style={{ width: '100px' }}>{this.props.currency} {this.props.discountAmount}</td>
                     </tr>
                   }
                   <tr className="text-end">

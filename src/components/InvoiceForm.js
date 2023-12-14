@@ -27,11 +27,11 @@ class InvoiceForm extends React.Component {
       notes: '',
       total: '0.00',
       subTotal: '0.00',
-      taxRate: '',
-      taxAmmount: '0.00',
+      taxRate: '20',
+      taxAmount: '0.00',
       discountRate: '',
-      discountAmmount: '0.00',
-      notes: 'IBAN NO TL : TR88 000640000011 2260 5601 45 \nIBAN NO USD : TR23 000640000021 2260 4748 83 \nIBAN NO EURO : TR060 006400000212260 4748 98 \nSWIFT : ISBKTRISXXX'
+      discountAmount: '0.00',
+      notes: 'Teklif Geçerlilik Süresi: Teklif Tarihinden İtibaren X Gün \nTeslim Şartı:  Kargo veya Sevkiyat \nÖdeme Şartı: Nakit / Havale\n-\nIBAN NO TL : TR88 000640000011 2260 5601 45 \nIBAN NO USD : TR23 000640000021 2260 4748 83 \nIBAN NO EURO : TR060 006400000212260 4748 98 \nSWIFT : ISBKTRISXXX'
     };
     this.state.items = [
       {
@@ -178,7 +178,7 @@ class InvoiceForm extends React.Component {
                   <span>
                     <span className="small ">({this.state.discountRate || 0}%)</span>
                     {this.state.currency}
-                    {this.state.discountAmmount || 0}</span>
+                    {this.state.discountAmount || 0}</span>
                 </div>
                 <div className="d-flex flex-row align-items-start justify-content-between mt-2">
                   <span className="fw-bold">VERGİ:
@@ -186,7 +186,7 @@ class InvoiceForm extends React.Component {
                   <span>
                     <span className="small ">({this.state.taxRate || 0}%)</span>
                     {this.state.currency}
-                    {this.state.taxAmmount || 0}</span>
+                    {this.state.taxAmount || 0}</span>
                 </div>
                 <hr/>
                 <div className="d-flex flex-row align-items-start justify-content-between" style={{
@@ -207,7 +207,7 @@ class InvoiceForm extends React.Component {
         <Col md={4} lg={3}>
           <div className="sticky-top pt-md-3 pt-xl-4">
             <Button variant="primary" type="submit" className="d-block w-100">Teklifi Önizle</Button>
-            <InvoiceModal showModal={this.state.isOpen} closeModal={this.closeModal} info={this.state} items={this.state.items} currency={this.state.currency} subTotal={this.state.subTotal} taxAmmount={this.state.taxAmmount} discountAmmount={this.state.discountAmmount} total={this.state.total}/>
+            <InvoiceModal showModal={this.state.isOpen} closeModal={this.closeModal} info={this.state} items={this.state.items} currency={this.state.currency} subTotal={this.state.subTotal} taxAmount={this.state.taxAmount} discountAmount={this.state.discountAmount} total={this.state.total}/>
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">PARA BİRİMİ:</Form.Label>
               <Form.Select onChange={event => this.onCurrencyChange({currency: event.target.value})} className="btn btn-light my-1" aria-label="Change Currency">
