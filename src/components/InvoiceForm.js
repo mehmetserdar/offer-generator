@@ -15,28 +15,29 @@ class InvoiceForm extends React.Component {
     this.state = {
       isOpen: false,
       currency: '$',
-      currentDate: '',
+      currentDate: '14.12.2023',
       invoiceNumber: 1,
-      dateOfIssue: '',
-      billTo: '',
-      billToEmail: '',
-      billToAddress: '',
-      billFrom: '',
-      billFromEmail: '',
-      billFromAddress: '',
-      notes: '',
+      dateOfIssue: '15.12.2023',
+      billTo: 'yyyyyyy',
+      billToEmail: 'xxxxxx@gmail.com',
+      billToAddress: 'zzzzzzz',
+      billFrom: 'aaaaaa',
+      billFromEmail: 'bbbbb@gmail.com',
+      billFromAddress: 'cccccccc',
+      notes: 'ggfggggghgghghghg',
       total: '0.00',
       subTotal: '0.00',
       taxRate: '',
       taxAmmount: '0.00',
       discountRate: '',
-      discountAmmount: '0.00'
+      discountAmmount: '0.00',
+      notes: 'IBAN NO TL : TR88 000640000011 2260 5601 45 \nIBAN NO USD : TR23 000640000021 2260 4748 83 \nIBAN NO EURO : TR060 006400000212260 4748 98 \nSWIFT : ISBKTRISXXX'
     };
     this.state.items = [
       {
         id: 0,
-        name: '',
-        description: '',
+        name: 'aaaaaaaaa',
+        description: 'aaaaaaaaaaa',
         price: '1.00',
         quantity: 1
       }
@@ -52,42 +53,41 @@ class InvoiceForm extends React.Component {
     this.setState(this.state.items);
   };
   handleAddEvent(evt) {
-    var id = (+ new Date() + Math.floor(Math.random() * 999999)).toString(36);
-    var items = {
+    var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+    var newItem = {
       id: id,
       name: '',
       price: '1.00',
       description: '',
       quantity: 1
-    }
-    this.state.items.push(items);
-    this.setState(this.state.items);
+    };
+  
+    // Use the functional form of setState to ensure the correct state update
+    this.setState((prevState) => ({
+      items: [...prevState.items, newItem]
+    }));
   }
+  
   handleCalculateTotal() {
     var items = this.state.items;
     var subTotal = 0;
-
-    items.map(function(items) {
-      subTotal = parseFloat(subTotal + (parseFloat(items.price).toFixed(2) * parseInt(items.quantity))).toFixed(2)
+  
+    items.forEach((item) => {
+      subTotal += parseFloat((parseFloat(item.price) * parseInt(item.quantity)).toFixed(2));
     });
-
+  
+    const taxAmount = parseFloat(subTotal * (this.state.taxRate / 100)).toFixed(2);
+    const discountAmount = parseFloat(subTotal * (this.state.discountRate / 100)).toFixed(2);
+    const total = (subTotal - discountAmount + parseFloat(taxAmount)).toFixed(2);
+  
     this.setState({
-      subTotal: parseFloat(subTotal).toFixed(2)
-    }, () => {
-      this.setState({
-        taxAmmount: parseFloat(parseFloat(subTotal) * (this.state.taxRate / 100)).toFixed(2)
-      }, () => {
-        this.setState({
-          discountAmmount: parseFloat(parseFloat(subTotal) * (this.state.discountRate / 100)).toFixed(2)
-        }, () => {
-          this.setState({
-            total: ((subTotal - this.state.discountAmmount) + parseFloat(this.state.taxAmmount))
-          });
-        });
-      });
+      subTotal: parseFloat(subTotal).toFixed(2),
+      taxAmount: taxAmount,
+      discountAmount: discountAmount,
+      total: total
     });
-
-  };
+  }
+  
   onItemizedItemEdit(evt) {
     var item = {
       id: evt.target.id,
@@ -192,7 +192,7 @@ class InvoiceForm extends React.Component {
                 <div className="d-flex flex-row align-items-start justify-content-between" style={{
                     fontSize: '1.125rem'
                   }}>
-                  <span className="fw-bold">TOPLAM:
+                  <span className="fw-bold">GENEL TOPLAM:
                   </span>
                   <span className="fw-bold">{this.state.currency}
                     {this.state.total || 0}</span>

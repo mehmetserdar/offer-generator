@@ -10,9 +10,9 @@ class InvoiceItem extends React.Component {
     var onItemizedItemEdit = this.props.onItemizedItemEdit;
     var currency = this.props.currency;
     var rowDel = this.props.onRowDel;
-    var itemTable = this.props.items.map(function(item) {
+    var itemTable = this.props.items.map(function (item) {
       return (
-        <ItemRow onItemizedItemEdit={onItemizedItemEdit} item={item} onDelEvent={rowDel.bind(this)} key={item.id} currency={currency}/>
+        <ItemRow onItemizedItemEdit={onItemizedItemEdit} item={item} onDelEvent={rowDel.bind(this)} key={item.id} currency={currency} />
       )
     });
     return (
@@ -44,59 +44,59 @@ class ItemRow extends React.Component {
   render() {
     return (
       <tr>
-        <td style={{width: '100%'}}>
+        <td style={{ width: '100%' }}>
           <EditableField
             onItemizedItemEdit={this.props.onItemizedItemEdit}
             cellData={{
-            type: "text",
-            name: "name",
-            placeholder: "Ürün Adı",
-            value: this.props.item.name,
-            id: this.props.item.id,
-          }}/>
-         <EditableField
-  onItemizedItemEdit={this.props.onItemizedItemEdit}
-  cellData={{
-    type: "textarea", // Set type to "textarea" for a multi-line text area
-    name: "description",
-    placeholder: "Ürün Açıklaması",
-    value: this.props.item.description,
-    id: this.props.item.id,
-    rows: 4, // Set the number of rows as needed
-    cols: 50, // Set the number of columns as needed
-  }}
-/>
+              type: "text",
+              name: "name",
+              placeholder: "Ürün Adı",
+              value: this.props.item.name,
+              id: this.props.item.id,
+            }} />
+          <EditableField
+            onItemizedItemEdit={this.props.onItemizedItemEdit}
+            cellData={{
+              type: "textarea", // Set type to "textarea" for a multi-line text area
+              name: "description",
+              placeholder: "Ürün Açıklaması",
+              value: this.props.item.description,
+              id: this.props.item.id,
+              rows: 4, // Set the number of rows as needed
+              cols: 50, // Set the number of columns as needed
+            }}
+          />
 
         </td>
-        <td style={{minWidth: '70px'}}>
-          <EditableField
-          onItemizedItemEdit={this.props.onItemizedItemEdit}
-          cellData={{
-            type: "number",
-            name: "quantity",
-            min: 1,
-            step: "1",
-            value: this.props.item.quantity,
-            id: this.props.item.id,
-          }}/>
-        </td>
-        <td style={{minWidth: '130px'}}>
+        <td style={{ minWidth: '70px' }}>
           <EditableField
             onItemizedItemEdit={this.props.onItemizedItemEdit}
             cellData={{
-            leading: this.props.currency,
-            type: "number",
-            name: "price",
-            min: 1,
-            step: "0.01",
-            presicion: 2,
-            textAlign: "text-end",
-            value: this.props.item.price,
-            id: this.props.item.id,
-          }}/>
+              type: "number",
+              name: "quantity",
+              min: 1,
+              step: "1",
+              value: this.props.item.quantity,
+              id: this.props.item.id,
+            }} />
         </td>
-        <td className="text-center" style={{minWidth: '50px'}}>
-          <BiTrash onClick={this.onDelEvent.bind(this)} style={{height: '33px', width: '33px', padding: '7.5px'}} className="text-white mt-1 btn btn-danger"/>
+        <td style={{ minWidth: '130px' }}>
+          <EditableField
+            onItemizedItemEdit={this.props.onItemizedItemEdit}
+            cellData={{
+              leading: this.props.currency,
+              type: "number",
+              name: "price",
+              min: 1,
+              step: "0.01",
+              presicion: 2,
+              textAlign: "text-end",
+              value: this.props.item.price,
+              id: this.props.item.id,
+            }} />
+        </td>
+        <td className="text-center" style={{ minWidth: '50px' }}>
+          <BiTrash onClick={this.onDelEvent.bind(this)} style={{ height: '33px', width: '33px', padding: '7.5px' }} className="text-white mt-1 btn btn-danger" />
         </td>
       </tr>
     );
