@@ -24,7 +24,7 @@ function GenerateInvoice() {
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-    pdf.save('invoice-001.pdf');
+    pdf.save('teklif.pdf');
   });
 }
 
@@ -47,8 +47,8 @@ class InvoiceModal extends React.Component {
                 </h6>
               </div>
               <div className="text-end ms-4">
-                <h6 className="fw-bold mt-1 mb-2">TOPLAM TUTAR:</h6>
-                <h5 className="fw-bold text-secondary"> {this.props.currency} {this.props.total}</h5>
+                <h6 className="fw-bold mt-1 mb-2">TEKLİFİN HAZIRLANDIĞI TARİH:</h6>
+                <h5 className="fw-bold text-secondary"> {new Date().toLocaleDateString()}</h5>
               </div>
             </div>
             <div className="p-4">
@@ -66,15 +66,14 @@ class InvoiceModal extends React.Component {
                   <div>{this.props.info.billFromEmail || ''}</div>
                 </Col>
                 <Col md={4}>
-                  <div className="fw-bold">GEÇERLİLİK TARİHİ:</div>
-                  <div>{this.props.info.dateOfIssue || ''}</div>
+                  <div className="fw-bold">TEKLİF {this.props.info.dateOfIssue || ''} GÜN GEÇERLİDİR.</div>
                 </Col>
               </Row>
               <Table className="mb-0">
                 <thead>
                   <tr>
-                    <th>ADET</th>
                     <th>ÜRÜN - AÇIKLAMA</th>
+                    <th>ADET</th>
                     <th className="text-end">FİYAT</th>
                     <th className="text-end">TUTAR</th>
                   </tr>
@@ -85,13 +84,13 @@ class InvoiceModal extends React.Component {
 
                     return (
                       <tr id={i} key={i}>
-                        <td style={{ width: '50px' }}>{item.quantity}</td>
                         <td>
                           <b>{item.name}</b>
                           {descriptionLines.map((line, index) => (
                             <div key={index}>{line}</div>
                           ))}
                         </td>
+                        <td style={{ width: '50px' }}>{item.quantity}</td>
                         <td className="text-end" style={{ width: '100px' }}>
                           {this.props.currency} {item.price}
                         </td>
@@ -138,10 +137,14 @@ class InvoiceModal extends React.Component {
                   </tr>
                 </tbody>
               </Table>
-              {this.props.info.notes &&
+              {this.props.info.notes && (
                 <div className="bg-light py-3 px-4 rounded">
-                  {this.props.info.notes}
-                </div>}
+                  {this.props.info.notes.split('\n').map((line, index) => (
+                    <div key={index}>{line}</div>
+                  ))}
+                </div>
+              )}
+
             </div>
           </div>
           <div className="pb-4 px-4">

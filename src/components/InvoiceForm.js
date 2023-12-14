@@ -36,8 +36,8 @@ class InvoiceForm extends React.Component {
     this.state.items = [
       {
         id: 0,
-        name: 'aaaaaaaaa',
-        description: 'aaaaaaaaaaa',
+        name: '',
+        description: '',
         price: '1.00',
         quantity: 1
       }
@@ -135,9 +135,9 @@ class InvoiceForm extends React.Component {
                   </div>
                 </div>
                 <div className="d-flex flex-row align-items-center">
-                  <span className="fw-bold d-block me-2">Geçerlilik&nbsp;Tarihi:</span>
-                  <Form.Control type="date" value={this.state.dateOfIssue} name={"dateOfIssue"} onChange={(event) => this.editField(event)} style={{
-                      maxWidth: '150px'
+                  <span className="fw-bold d-block me-2">Kaç Gün&nbsp;Geçerli Olacak?</span>
+                  <Form.Control type="number" value={this.state.dateOfIssue} name={"dateOfIssue"} onChange={(event) => this.editField(event)} style={{
+                      maxWidth: '50px'
                     }} required="required"/>
                 </div>
               </div>
