@@ -144,7 +144,7 @@ class InvoiceForm extends React.Component {
               <div className="d-flex flex-row align-items-center">
                 <span className="fw-bold me-2">Teklif&nbsp;No:&nbsp;</span>
                 <Form.Control type="number" value={this.state.invoiceNumber} name={"invoiceNumber"} onChange={(event) => this.editField(event)} min="1" style={{
-                    maxWidth: '70px'
+                    maxWidth: '140px'
                   }} required="required"/>
               </div>
             </div>
@@ -201,7 +201,7 @@ class InvoiceForm extends React.Component {
             </Row>
             <hr className="my-4"/>
             <Form.Label className="fw-bold">NOTLAR:</Form.Label>
-            <Form.Control placeholder="Notları buraya ekleyebilirsiniz!" name="notes" value={this.state.notes} onChange={(event) => this.editField(event)} as="textarea" className="my-2" rows={1}/>
+            <Form.Control placeholder="Notları buraya ekleyebilirsiniz!" name="notes" value={this.state.notes} onChange={(event) => this.editField(event)} as="textarea" className="my-2" rows={9}/>
           </Card>
         </Col>
         <Col md={4} lg={3}>
